@@ -9,3 +9,13 @@ cabal-dev
 .cabal-sandbox/
 cabal.sandbox.config
 cabal.config
+*~
+*.log
+*.aux
+*.bbl
+*.toc
+*.ind
+*.idx
+*.blg
+*.ilg
+*.out

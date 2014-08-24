@@ -1,0 +1,96 @@
+%% Generic LNCS-style theorems also without LNCS.
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{spamsthm}
+
+\let\if@sp@envcntsect\iffalse
+\let\if@sp@envcntsame\iffalse
+\let\if@sp@envcntswap\iffalse
+\DeclareOption{envcountsect}{\let\if@sp@envcntsect\iftrue}
+\DeclareOption{envcountsame}{\let\if@sp@envcntsame\iftrue}
+\DeclareOption{envcountswap}{\let\if@sp@envcntswap\iftrue}
+\ProcessOptions
+
+\ifx\spnewtheorem\undefined
+
+%% NON-LLNCS SETUP.
+
+\RequirePackage{amsthm}
+
+\def\th@major{\thm@notefont{\bf}\itshape}
+\def\th@normal{\thm@notefont{\bf}\normalfont}
+\def\th@minor{\thm@headfont{\it}\thm@notefont{\it}\normalfont
+  \thm@preskip\topsep \divide\thm@preskip\tw@ \thm@postskip\thm@preskip}
+
+\let\theorem=\undefined
+\let\lemma=\undefined
+\let\definition=\undefined
+\let\example=\undefined
+\let\proposition=\undefined
+\let\note=\undefined
+
+\theoremstyle{major}
+\if@sp@envcntswap
+ \swapnumbers
+\fi
+\if@sp@envcntsect
+ \newtheorem{theorem}{Theorem}[section]
+\else
+ \newtheorem{theorem}{Theorem}
+\fi
+\if@sp@envcntsame
+  \def\spamsnewtheorem#1#2{\newtheorem{#1}[theorem]{#2}}
+\else\if@sp@envcntsect
+  \def\spamsnewtheorem#1#2{\newtheorem{#1}{#2}[section]}
+\else
+  \def\spamsnewtheorem#1#2{\newtheorem{#1}{#2}}
+\fi\fi
+
+\spamsnewtheorem{lemma}{Lemma}
+\spamsnewtheorem{corollary}{Corollary}
+\spamsnewtheorem{conjecture}{Conjecture}
+
+\theoremstyle{normal}
+\spamsnewtheorem{definition}{Definition}
+\spamsnewtheorem{example}{Example}
+\spamsnewtheorem{scenario}{Scenario}
+\spamsnewtheorem{proposition}{Proposition}
+\spamsnewtheorem{property}{Property}
+\spamsnewtheorem{notation}{Notation}
+\spamsnewtheorem{exercise}{Exercise}
+\spamsnewtheorem{problem}{Problem}
+\spamsnewtheorem{question}{Question}
+\spamsnewtheorem{solution}{Solution}
+
+\theoremstyle{minor}
+\spamsnewtheorem{remark}{Remark}
+\spamsnewtheorem{note}{Note}
+\spamsnewtheorem{case}{Case}
+
+\theoremstyle{normal}
+
+\newenvironment{one-off}[2][normal]{\theoremstyle{#1}\spamsnewtheorem{one-off@#2}{#2}\def\end@one@off{\csname endone-off@#2\endcsname}\csname one-off@#2\endcsname}{\end@one@off}
+
+\else
+
+%% LLNCS TWEAKS
+
+%% Put number before theorems :)
+\if@sp@envcntswap
+\def\@spbegintheorem#1#2#3#4{\trivlist
+                 \item[\hskip\labelsep{#3#2\ #1\@thmcounterend}]#4}
+\def\@spopargbegintheorem#1#2#3#4#5{\trivlist
+      \item[\hskip\labelsep{#4#2\ #1}]{#4(#3)\@thmcounterend\ }#5}
+\fi
+
+\if@sp@envcntsame
+  \def\spamsnewtheorem#1#2{\spnewtheorem{#1}{#2}{\bfseries}{\rmfamily}}
+\else\if@sp@envcntsect
+  \def\spamsnewtheorem#1#2{\spnewtheorem{#1}{#2}{\bfseries}{\rmfamily}}
+\else
+  \def\spamsnewtheorem#1#2{\spnewtheorem{#1}{#2}{\bfseries}{\rmfamily}}
+\fi\fi
+
+\newenvironment{one-off}[2][normal]{\spnewtheorem{one-off@#2}[theorem]{#2}{\itshape}{\rmfamily}\def\end@one@off{\csname endone-off@#2\endcsname}\csname one-off@#2\endcsname}{\end@one@off}
+
+\fi

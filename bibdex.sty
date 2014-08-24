@@ -1,0 +1,20 @@
+\RequirePackage{makeidx}
+
+\def\BIBLIOGRAPHY#1{%
+  {\let\origsection@=\section \let\section=\mysection@ref
+    \bibliography{#1}}}
+
+\def\mysection@ref*#1{\origsection@*{#1}%
+ \addtocontents{toc}{\protect\smallskip}%
+ \addcontentsline{toc}{section}{\protect\numberline{}References}%
+ \addtocontents{toc}{\protect\smallskip}}
+
+\def\INDEX{{\let\origsection@=\section \let\section=\mysection@index
+     \printindex}}
+
+\def\mysection@index*#1{%
+   \origsection@*{#1}%
+   \addtocontents{toc}{\protect\smallskip}
+   \addcontentsline{toc}{section}{\protect\numberline{}#1}}
+             {\if@restonecol\onecolumn\else\clearpage\fi}
+
