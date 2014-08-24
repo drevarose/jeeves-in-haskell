@@ -19,7 +19,7 @@
 \makeindex
 %% Topmatter.
 %%
-\title{Constraint Generation for the Jeeves Privacy Language}
+\title{Constraint Generation for the Jeeves Privacy Language\thanks{Draft: please comment!}}
 \author{Eva Rose\\ Courant Institute, New York University\thanks{This work was conducted whilst at CSAIL, Massachussets Institute of Technology, 2012.} \\ evarose@cs.nyu.edu}
 %%
 \begin{document}\maketitle
