@@ -1,0 +1,11 @@
+-- Jeeves example adapted from Yang etal. (POPL 2012).  
+
+let name = 
+  level a in
+  policy a: !(context = "alice") then bottom in
+    < "Anonymous" | "Alice" >(a)
+
+let msg = "Author is " + name
+
+print {"alice"} msg
+print {"bob"} msg

@@ -1,0 +1,41 @@
+-- Jeeves example adapted from Yang etal. (POPL 2012).  
+
+let mkPaper 
+   title author accepted =
+   level tp, authp, accp in 
+   let p = { title = <""|title>(tp)
+           ; author = <"Anonymized"|author>(authp)
+           ; accepted = <"none"|accepted>(accp) } in
+   addTitlePolicy p tp ; addAuthorPolicy p authp;
+   addAcceptedPolicy p accp;
+     p
+
+let addTitlePolicy p a =                       
+   policy a: ! (context.viewer.name = p.author
+     || context.viewer.role = Reviewer
+     || context.viewer.role = PC
+     || context.stage = Public && isAccepted p) then bottom
+   in p
+
+let addAcceptedPolicy p a = 
+  policy a: ! (context.viewer.role = Reviewer
+     || context.viewer.role = PC
+     || context.stage = Public) then bottom
+   in p
+      
+let addAuthorPolicy p n = 
+  policy n: ! (isAuthor p context.viewer 
+     || context.stage = Public && isAccepted p) then bottom
+   in p
+
+let alice = {name = "Alice"; role = PC}
+
+let bob = {name = "Bob"; role = Reviewer}
+
+let isAuthor p viewer = (p.author = viewer.name)
+
+let isAccepted p = !(p.accepted = "none")
+  
+print {{viewer = alice; stage = Public}} mkPaper "MyPaper" "Alice" Accepted
+
+print {{viewer = bob; stage = Public}} mkPaper "MyPaper" "Alice" Accepted

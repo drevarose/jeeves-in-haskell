@@ -1,6 +1,6 @@
 # Makefile.
 
-jeeves-constraints.pdf: jeeves-constraints.lhs format.tex jeeves.bib
+jeeves-constraints.pdf: jeeves-constraints.lhs format.tex jeeves.bib Tests/testp1.jeeves Tests/testp2.jeeves
 	cp jeeves-constraints.lhs jeeves-constraints-tmp.tex
 	pdflatex jeeves-constraints-tmp
 	bibtex jeeves-constraints-tmp
@@ -12,4 +12,4 @@ jeeves-constraints.pdf: jeeves-constraints.lhs format.tex jeeves.bib
 	mv jeeves-constraints-tmp.pdf jeeves-constraints.pdf
 
 clean:
-	rm *-tmp.*
+	rm -f *-tmp.* *~
