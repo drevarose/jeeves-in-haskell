@@ -7,9 +7,9 @@
 \usepackage[T1]{fontenc}          % allow bold sans serif
 \usepackage{charter}
 \bibliographystyle{plain}         % use citations [1], [2], ...
-\usepackage[draft]{showlabels}
+%%% \usepackage[draft]{showlabels} 
 \usepackage[all]{xy}
-\renewcommand{\showlabelfont}{\scriptsize}
+%%\renewcommand{\showlabelfont}{\scriptsize}
 
 \newcommand\lambdaJ{{\ensuremath{\lambda_{\text{J}}}}}
 
@@ -19,7 +19,7 @@
 \makeindex
 %% Topmatter.
 %%
-\title{Constraint Generation for the Jeeves Privacy Language\thanks{Draft: please comment!}}
+\title{Constraint Generation for the Jeeves Privacy Language}
 \author{Eva Rose\\ Courant Institute, New York University\thanks{This work was conducted whilst at CSAIL, Massachussets Institute of Technology, 2012.} \\ evarose@cs.nyu.edu}
 %%
 \begin{document}\maketitle
@@ -31,7 +31,7 @@ Our goal is to present a completed, semantic formalization of the Jeeves privacy
 Specifically, we present and implement a syntactically and semantically completed concrete syntax for Jeeves that meets the example criteria given in the paper. 
 We also present and implement the associated translation to \lambdaJ, but here formulated by a completed and  decompositional operational semantic formulation.  
 Finally, we present  an enhanced and decompositional, non-substitutional operational semantic formulation and implementation of the  \lambdaJ\ evaluation engine (the dynamic semantics) with privacy constraints. In particular, we show  how implementing the constraints can be defined as a monad, and evaluation can be defined as monadic operation on the constraint environment.
-The implementations are all completed in Haskell, utilizing its almost one-to-one capability to transparently reflect the underlying semantic reasoning when formalized out way.  
+The implementations are all completed in Haskell, utilizing its almost one-to-one capability to transparently reflect the underlying semantic reasoning when formalized this way.  
 In practice, we have applied the "literate" program facility of Haskell to this report, a feature that enables the source \LaTeX\ to also serve as the source code for the implementation (skipping the report-parts as comment regions). The implementation is published as a github project~\cite{Rose:github2014}.
   
 \end{abstract}
